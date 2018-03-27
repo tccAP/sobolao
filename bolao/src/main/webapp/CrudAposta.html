@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Bolao</title>
+    <script src="http://code.angularjs.org/1.0.1/angular-1.0.1.min.js"></script>
+    <script src="scripts/aposta-controller.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+<div ng-controller="ApostaController">
+
+    <div class="row">
+        <div style="text-align: center; margin-top: 80px;">
+            <h1>Cadastrar Aposta</h1>
+            <form class="form-control form-inline" name="formAposta">
+                <div class="row" style="float: left">
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Numeros</label>
+                        <br>
+                        <div class="spanNumero" ng-repeat="n in newAposta.numerosArray" ng-click="removeNumero(n)">
+                            {{pad(n,2)}}
+                        </div>
+                        <div>
+                            <div class="spanAllNumbers col-md-1"
+                                 ng-class="{spanNumero: !(newAposta.numerosArray.indexOf(n) < 0)}"
+                                 ng-repeat="n in allNumbers" ng-click="clickAllNumbers(n)">{{pad(n,2)}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="bolao">Bolao</label>
+                            <br>
+                            <select id="bolao" ng-model="newAposta.bolao">
+                                <option ng-repeat="bolao in boloes" value="{{bolao}}">{{bolao.id +" -
+                                    "+bolao.organizador.nome}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="jogo">Jogo</label>
+                            <br>
+                            <select id="jogo" ng-model="newAposta.jogo">
+                                <option ng-repeat="jogo in jogos" value="{{jogo.name}}">{{jogo.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label" for="concurso">Concurso</label>
+                            <br>
+                            <input id="concurso" type="text" ng-model="newAposta.concurso"></input>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label" for="identificador">Identificador</label>
+                            <br>
+                            <input id="identificador" type="text" ng-model="newAposta.identificador"></input>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="valor">Valor</label>
+                            <br>
+                            <input id="valor" type="text" ng-model="newAposta.valor"></input>
+                        </div>
+                        <button ng-click="save()">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row" style="">
+
+        <div style=" width:50%; margin-left: auto; margin-right: auto;">
+            <h4>Informações do Bolao</h4>
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Organizador</th>
+                    <th>Participantes</th>
+                    <th>Data do sorteio</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{bolao.id}}</td>
+                    <td>{{bolao.organizador.nome}}</td>
+                    <td>
+
+ <span ng-repeat="participante in bolao.participantes">
+                                            {{participante.nome+'; '}}
+                                        </span>
+                    </td>
+                    <td>{{bolao.dataSorteio}}</td>
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+    <div style="">
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Jogo</th>
+                <th>Concurso</th>
+                <th>Numeros</th>
+                <th>Acertos</th>
+                <th>Valor</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="aposta in apostas | orderBy:'acertos'">
+                <td>{{aposta.identificador}}</td>
+                <td>{{aposta.jogo}}</td>
+                <td>{{aposta.concurso}}</td>
+                <td>{{aposta.numeros}}</td>
+                <td>{{aposta.acertos}}</td>
+                <td>{{aposta.valor}}</td>
+
+                <td><img src="img/lixeira.png" class="iconTableCrud" ng-click="deleteAposta(aposta.id)">
+                    <img src="img/editar.png" class="iconTableCrud" ng-click="selectAposta(aposta)"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
