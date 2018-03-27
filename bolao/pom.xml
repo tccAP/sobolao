@@ -138,7 +138,7 @@
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>1.2.1</version>
                     <configuration>
-                        <mainClass>com.example.Main</mainClass>
+                        <mainClass>br.com.opasystem.bolao.Boot</mainClass>
                     </configuration>
                 </plugin>
 
