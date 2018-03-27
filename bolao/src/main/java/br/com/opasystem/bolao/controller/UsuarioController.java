@@ -41,6 +41,17 @@ public class UsuarioController {
     }
 
     @ResponseBody
+    @GetMapping("/findByEmail/{email}")
+    public ResponseEntity<Usuario> findByEmail(@PathVariable("email") String email) {
+        try {
+            System.out.println("----EMAIL-------->"+email);
+            return new ResponseEntity<Usuario>(usuarioService.findByEmail(email), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @ResponseBody
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> findById(@PathVariable("id") Integer id) {
         try {

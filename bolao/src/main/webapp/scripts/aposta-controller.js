@@ -122,7 +122,7 @@ function ApostaController($scope, $http, $route) {
                 .success(function (data) {
                     $scope.apostas = data;
                 })
-                .error(function (error) {
+                .error(function (error) {aposta
                     console.log("Retorno: " + error);
                 });
         }

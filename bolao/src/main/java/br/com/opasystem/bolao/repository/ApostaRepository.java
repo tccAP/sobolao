@@ -21,18 +21,6 @@ public class ApostaRepository {
     }
 
     public List<Aposta> findByBolao(Integer id) {
-/*
-
-        "select pos " +
-                "from ProcessoOs pos " +
-                "  left join fetch pos.ordemServico "  +
-                "  left join fetch pos.situacao "  +
-                "where pos.responsavel.id = " + f.getId()   +
-                " and (pos.situacao.tipo = 'N' or pos.situacao.tipo = null)"  +
-                " and pos.ordemServico.status = 'P' " +
-                "order by pos.dataFim, pos.nivel"
-*/
-
 
         String h = "SELECT aposta FROM Aposta aposta " +
                 "JOIN FETCH aposta.bolao " +
