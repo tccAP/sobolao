@@ -53,6 +53,17 @@ public class BolaoController {
         }
     }
 
+    @ResponseBody
+    @GetMapping("/findByOwner/{email}")
+    public ResponseEntity<List<Bolao>> findByOwner(@PathVariable("email") String email) {
+        System.out.println(email);
+        try {
+            return new ResponseEntity<List<Bolao>>(bolaoService.findByOwner(email), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<List<Bolao>>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/")
     public ResponseEntity add(@RequestBody Bolao bolao) {
         try {

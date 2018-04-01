@@ -51,7 +51,7 @@ public class UsuarioController {
             if (user != null) {
                 return new ResponseEntity<Usuario>(user, HttpStatus.OK);
             } else {
-                return new ResponseEntity<Usuario>(user, HttpStatus.NO_CONTENT);
+                return new ResponseEntity<Usuario>(user, HttpStatus.OK);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,21 +72,10 @@ public class UsuarioController {
     @PostMapping("/")
     public ResponseEntity<Usuario> add(@RequestBody Usuario usuario) {
         LOG.debug(usuario.toString());
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        System.out.println(usuario.toString());
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         try {
             usuarioService.save(usuario);
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-            System.out.println(usuario.toString());
-            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             return new ResponseEntity<Usuario>(usuario,HttpStatus.CREATED);
         } catch (Exception e) {
-            System.out.println("ERRO ERRO ERRO ERRO ERRO ");
             return new ResponseEntity<Usuario>(usuario, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

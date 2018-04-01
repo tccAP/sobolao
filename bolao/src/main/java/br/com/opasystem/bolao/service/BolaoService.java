@@ -23,6 +23,10 @@ public class BolaoService {
         return bolaoRepository.findById(id);
     }
 
+    public List<Bolao> findByOwner(String email) {
+        return bolaoRepository.findByOwner(email);
+    }
+
     public List<Bolao> list() {
         return bolaoRepository.all();
     }

@@ -1,7 +1,7 @@
 function BolaoController($scope, $http, $route) {
 
 
-    var baseUrl = "http://localhost:8090/bolao";
+    var baseUrl = "http://localhost:8080/bolao";
     $scope.boloes = [];
     $scope.newBolao = {};
     $scope.usuariosPossiveis =[];
