@@ -72,6 +72,11 @@ public class UsuarioController {
     @PostMapping("/")
     public ResponseEntity add(@RequestBody Usuario usuario) {
         LOG.debug(usuario.toString());
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println(usuario.toString());
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         try {
             usuarioService.save(usuario);
             return new ResponseEntity<Usuario>(HttpStatus.CREATED);
