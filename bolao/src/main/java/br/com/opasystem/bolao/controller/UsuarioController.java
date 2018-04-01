@@ -70,7 +70,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/")
-    public ResponseEntity add(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> add(@RequestBody Usuario usuario) {
         LOG.debug(usuario.toString());
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -84,10 +84,10 @@ public class UsuarioController {
             System.out.println(usuario.toString());
             System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            return new ResponseEntity(HttpStatus.CREATED);
+            return new ResponseEntity<Usuario>(usuario,HttpStatus.CREATED);
         } catch (Exception e) {
             System.out.println("ERRO ERRO ERRO ERRO ERRO ");
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<Usuario>(usuario, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
