@@ -65,6 +65,7 @@ public class UsuarioController {
                 return new ResponseEntity<Usuario>(user, HttpStatus.NO_CONTENT);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
