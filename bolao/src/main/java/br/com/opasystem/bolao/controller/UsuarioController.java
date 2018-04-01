@@ -45,7 +45,13 @@ public class UsuarioController {
     public ResponseEntity<Usuario> findByEmail(@PathVariable("email") String email) {
         try {
             System.out.println("----EMAIL-------->"+email);
-            return new ResponseEntity<Usuario>(usuarioService.findByEmail(email), HttpStatus.OK);
+
+            Usuario user = usuarioService.findByEmail(email);
+            if(user != null){
+                return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+            } else{
+                return new ResponseEntity<Usuario>(user, HttpStatus.NO_CONTENT);
+            }
         } catch (Exception e) {
             return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
