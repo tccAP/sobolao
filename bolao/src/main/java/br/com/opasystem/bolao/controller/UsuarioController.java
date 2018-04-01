@@ -2,6 +2,8 @@ package br.com.opasystem.bolao.controller;
 
 import br.com.opasystem.bolao.models.Usuario;
 import br.com.opasystem.bolao.service.UsuarioService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import java.util.List;
 @RequestMapping("/usuario")
 @Transactional
 public class UsuarioController {
+    private static final Logger LOG = LoggerFactory.getLogger(UsuarioController.class);
 
     @Autowired
     private UsuarioService usuarioService;
@@ -45,9 +48,9 @@ public class UsuarioController {
     public ResponseEntity<Usuario> findByEmail(@PathVariable("email") String email) {
         try {
             Usuario user = usuarioService.findByEmail(email);
-            if(user != null){
+            if (user != null) {
                 return new ResponseEntity<Usuario>(user, HttpStatus.OK);
-            } else{
+            } else {
                 return new ResponseEntity<Usuario>(user, HttpStatus.NO_CONTENT);
             }
         } catch (Exception e) {
@@ -68,6 +71,7 @@ public class UsuarioController {
 
     @PostMapping("/")
     public ResponseEntity add(@RequestBody Usuario usuario) {
+        LOG.debug(usuario.toString());
         try {
             usuarioService.save(usuario);
             return new ResponseEntity<Usuario>(HttpStatus.CREATED);
