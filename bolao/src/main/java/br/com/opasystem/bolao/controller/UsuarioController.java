@@ -79,8 +79,14 @@ public class UsuarioController {
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         try {
             usuarioService.save(usuario);
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            System.out.println(usuario.toString());
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             return new ResponseEntity<Usuario>(HttpStatus.CREATED);
         } catch (Exception e) {
+            System.out.println("ERRO ERRO ERRO ERRO ERRO ");
             return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
