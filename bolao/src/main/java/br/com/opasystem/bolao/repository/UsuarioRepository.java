@@ -1,17 +1,11 @@
 package br.com.opasystem.bolao.repository;
 
-import br.com.opasystem.bolao.models.Aposta;
-import br.com.opasystem.bolao.models.Bolao;
 import br.com.opasystem.bolao.models.Usuario;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -35,11 +29,9 @@ public class UsuarioRepository {
 
 
         Query query = manager.createQuery(h);
-        query.setParameter("email",email);
-        List results = query.getResultList();
+        query.setParameter("email", email);
+        return (Usuario) query.getSingleResult();
 
-        return (Usuario) results.get(0);
-        
     }
 
     public void remove(Usuario usuario) {
