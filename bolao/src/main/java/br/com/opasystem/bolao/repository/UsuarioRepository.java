@@ -4,6 +4,7 @@ import br.com.opasystem.bolao.models.Usuario;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
@@ -24,13 +25,17 @@ public class UsuarioRepository {
     public Usuario findByEmail(String email) {
 
 
-        String h = "SELECT usuario FROM Usuario usuario " +
+        String h = "FROM Usuario usuario " +
                 "WHERE usuario.email = :email";
 
 
         Query query = manager.createQuery(h);
         query.setParameter("email", email);
-        return (Usuario) query.getSingleResult();
+        try {
+            return (Usuario) query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
 
     }
 

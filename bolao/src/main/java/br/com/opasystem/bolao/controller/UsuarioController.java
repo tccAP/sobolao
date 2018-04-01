@@ -44,24 +44,10 @@ public class UsuarioController {
     @GetMapping("/findByEmail/{email}")
     public ResponseEntity<Usuario> findByEmail(@PathVariable("email") String email) {
         try {
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("----EMAIL-------->"+email);
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println("----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
             Usuario user = usuarioService.findByEmail(email);
             if(user != null){
-                System.out.println("USER NOT NULL");
                 return new ResponseEntity<Usuario>(user, HttpStatus.OK);
             } else{
-                System.out.println("USER NULL");
                 return new ResponseEntity<Usuario>(user, HttpStatus.NO_CONTENT);
             }
         } catch (Exception e) {
