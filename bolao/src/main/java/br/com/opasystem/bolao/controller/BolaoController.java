@@ -2,6 +2,7 @@ package br.com.opasystem.bolao.controller;
 
 import br.com.opasystem.bolao.models.Bolao;
 import br.com.opasystem.bolao.service.BolaoService;
+import br.com.opasystem.bolao.view.BoloesView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 
@@ -55,12 +53,15 @@ public class BolaoController {
 
     @ResponseBody
     @GetMapping("/findByOwner/{email}")
-    public ResponseEntity<List<Bolao>> findByOwner(@PathVariable("email") String email) {
+    public ResponseEntity<BoloesView> findByOwner(@PathVariable("email") String email) {
         System.out.println(email);
         try {
-            return new ResponseEntity<List<Bolao>>(bolaoService.findByOwner(email), HttpStatus.OK);
+            BoloesView view = new BoloesView();
+            view.setBoloes(bolaoService.findByOwner(email));
+
+            return new ResponseEntity<BoloesView>(view, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<List<Bolao>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<BoloesView>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
