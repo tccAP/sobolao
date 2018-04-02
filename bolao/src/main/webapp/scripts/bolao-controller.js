@@ -1,7 +1,7 @@
 function BolaoController($scope, $http, $route) {
 
 
-    var baseUrl = "http://localhost:8080/bolao";
+    var baseUrl = "http://sobolao-sobolao.193b.starter-ca-central-1.openshiftapps.com/bolao";
     $scope.boloes = [];
     $scope.newBolao = {};
     $scope.usuariosPossiveis =[];

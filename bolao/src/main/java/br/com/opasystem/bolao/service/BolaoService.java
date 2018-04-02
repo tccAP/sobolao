@@ -27,6 +27,10 @@ public class BolaoService {
         return bolaoRepository.findByOwner(email);
     }
 
+    public List<Bolao> findByParticipant(String email) {
+        return bolaoRepository.findByParticipant(email);
+    }
+
     public List<Bolao> list() {
         return bolaoRepository.all();
     }

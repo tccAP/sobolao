@@ -65,6 +65,20 @@ public class BolaoController {
         }
     }
 
+    @ResponseBody
+    @GetMapping("/findByParticipant/{email}")
+    public ResponseEntity<BoloesView> findByParticipant(@PathVariable("email") String email) {
+        try {
+            BoloesView view = new BoloesView();
+            view.setBoloes(bolaoService.findByParticipant(email));
+
+            return new ResponseEntity<BoloesView>(view, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<BoloesView>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @PostMapping("/")
     public ResponseEntity add(@RequestBody Bolao bolao) {
         try {

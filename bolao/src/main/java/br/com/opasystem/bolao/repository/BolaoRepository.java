@@ -1,6 +1,5 @@
 package br.com.opasystem.bolao.repository;
 
-import br.com.opasystem.bolao.models.Aposta;
 import br.com.opasystem.bolao.models.Bolao;
 import org.springframework.stereotype.Repository;
 
@@ -21,15 +20,33 @@ public class BolaoRepository {
         return manager.find(Bolao.class, id);
     }
 
-    public  List<Bolao>  findByOwner(String email) {
+    public List<Bolao> findByOwner(String email) {
 
         String h = "SELECT bolao FROM Bolao bolao " +
                 "JOIN FETCH bolao.organizador " +
                 "WHERE bolao.organizador.email = :email";
 
         Query query = manager.createQuery(h);
-        query.setParameter("email",email);
+        query.setParameter("email", email);
         List results = query.getResultList();
+
+        return (List<Bolao>) results;
+    }
+
+    public List<Bolao> findByParticipant(String email) {
+
+/*        String h = "SELECT bolao FROM Bolao bolao " +
+                "JOIN FETCH bolao.participantes " +
+                "WHERE bolao.participantes.email = :email";
+
+
+        Query query = manager.createQuery(h);
+        query.setParameter("email",email);
+        List results = query.getResultList();*/
+        Query q = manager.createQuery("select bolao from Bolao bolao inner join bolao.participantes participantes where  participantes.email=:email");
+
+        q.setParameter("email", email);
+        List results = q.getResultList();
 
         return (List<Bolao>) results;
     }
