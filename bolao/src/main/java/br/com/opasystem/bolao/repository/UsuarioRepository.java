@@ -1,7 +1,10 @@
 package br.com.opasystem.bolao.repository;
 
+import br.com.opasystem.bolao.controller.UsuarioController;
 import br.com.opasystem.bolao.models.Usuario;
 import org.hibernate.Criteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -20,6 +23,7 @@ import java.util.List;
 @Repository
 public class UsuarioRepository {
 
+    private static final Logger LOG = LoggerFactory.getLogger(UsuarioRepository.class);
     @PersistenceContext
     private EntityManager manager;
 
@@ -62,6 +66,8 @@ public class UsuarioRepository {
 
 
     public Usuario validateLogin(Usuario usuario) {
+
+        System.out.println(usuario.toString());
 
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Usuario> criteria = builder.createQuery( Usuario.class );
