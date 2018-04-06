@@ -81,6 +81,19 @@ public class UsuarioController {
 
     }
 
+    @PostMapping("/validateLogin/")
+    public ResponseEntity<Usuario> validateLogin(@RequestBody Usuario usuario) {
+        try {
+            usuarioService.validateLogin(usuario);
+            return new ResponseEntity<Usuario>(usuario,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<Usuario>(usuario, HttpStatus.UNAUTHORIZED);
+        }
+
+    }
+
+
+
     @PutMapping("/")
     public ResponseEntity<Usuario> update(@RequestBody Usuario usuario) {
         try {

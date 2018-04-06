@@ -35,7 +35,7 @@ function UsuarioController($scope, $http, $route) {
     }
 
     $scope.adicionaUsuario = function () {
-        $http.post(baseUrl + '/usuario/', $scope.newUsuario).success(function (response) {
+        $http.post(baseUrl + '/usuario/' ,$scope.newUsuario).success(function (response) {
             getListUsuario();
         }).error(function (error) {
             console.log(error);
