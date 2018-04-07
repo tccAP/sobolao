@@ -21,7 +21,7 @@ public class Usuario {
 
     private String username;
 
-    private String nome;
+    private String name;
 
     private String email;
 
@@ -35,12 +35,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -72,7 +72,7 @@ public class Usuario {
         return "Usuario{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", nome='" + nome + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 '}';
@@ -82,7 +82,7 @@ public class Usuario {
         UsuarioView view = new UsuarioView();
         view.setId(this.getId());
         view.setUsername(this.getUsername());
-        view.setNome(this.getNome());
+        view.setName(this.getName());
         view.setEmail(this.getEmail());
         return view;
     }
