@@ -73,6 +73,7 @@ public class UsuarioController {
 
             UsuarioView user = usuarioService.findById(id).toUsuarioView();
             return new ResponseEntity<UsuarioView>(user, HttpStatus.OK);
+            
         } catch (Exception e) {
             return new ResponseEntity<UsuarioView>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
