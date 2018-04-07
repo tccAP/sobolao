@@ -1,6 +1,8 @@
 package br.com.opasystem.bolao.models;
 
 
+import br.com.opasystem.bolao.dto.UsuarioView;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -74,5 +76,14 @@ public class Usuario {
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 '}';
+    }
+
+    public UsuarioView toUsuarioView() {
+        UsuarioView view = new UsuarioView();
+        view.setId(this.getId());
+        view.setUsername(this.getUsername());
+        view.setNome(this.getNome());
+        view.setEmail(this.getEmail());
+        return view;
     }
 }

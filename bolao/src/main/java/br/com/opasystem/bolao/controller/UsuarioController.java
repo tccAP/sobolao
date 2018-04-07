@@ -1,5 +1,6 @@
 package br.com.opasystem.bolao.controller;
 
+import br.com.opasystem.bolao.dto.UsuarioView;
 import br.com.opasystem.bolao.models.Usuario;
 import br.com.opasystem.bolao.service.UsuarioService;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,45 +37,44 @@ public class UsuarioController {
 
     @ResponseBody
     @GetMapping("/")
-    public ResponseEntity<List<Usuario>> list() {
+    public ResponseEntity<List<UsuarioView>> list() {
         try {
-            List<Usuario> lst =  usuarioService.list();
-            for(Usuario user : lst){
-               user.setSenha(null);
+            List<Usuario> lst = usuarioService.list();
+            List<UsuarioView> lstView = new ArrayList<>();
+            for (Usuario user : lst) {
+                lstView.add(user.toUsuarioView());
             }
-            return new ResponseEntity<List<Usuario>>(lst , HttpStatus.OK);
+            return new ResponseEntity<List<UsuarioView>>(lstView, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<List<Usuario>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<List<UsuarioView>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @ResponseBody
     @GetMapping("/findByEmail/{email}")
-    public ResponseEntity<Usuario> findByEmail(@PathVariable("email") String email) {
+    public ResponseEntity<UsuarioView> findByEmail(@PathVariable("email") String email) {
         try {
-            Usuario user = usuarioService.findByEmail(email);
-            user.setSenha(null);
+            UsuarioView user = usuarioService.findByEmail(email).toUsuarioView();
             if (user != null) {
-                return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+                return new ResponseEntity<UsuarioView>(user, HttpStatus.OK);
             } else {
-                return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+                return new ResponseEntity<UsuarioView>(user, HttpStatus.OK);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UsuarioView>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @ResponseBody
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> findById(@PathVariable("id") Integer id) {
+    public ResponseEntity<UsuarioView> findById(@PathVariable("id") Integer id) {
         try {
 
-            Usuario  user = usuarioService.findById(id);
-            user.setSenha(null);
-            return new ResponseEntity<Usuario>(user , HttpStatus.OK);
+            UsuarioView user = usuarioService.findById(id).toUsuarioView();
+            return new ResponseEntity<UsuarioView>(user, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UsuarioView>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -82,7 +83,6 @@ public class UsuarioController {
         LOG.debug(usuario.toString());
         try {
             usuarioService.save(usuario);
-            usuario.setSenha(null);
             return new ResponseEntity<Usuario>(usuario, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<Usuario>(usuario, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -91,46 +91,44 @@ public class UsuarioController {
     }
 
     @PostMapping("/validateLogin/")
-    public ResponseEntity<Usuario> validateLogin(@RequestBody Usuario usuario) {
+    public ResponseEntity<UsuarioView> validateLogin(@RequestBody Usuario usuario) {
         try {
-            Usuario userDatabase = usuarioService.validateLogin(usuario);
-            userDatabase.setSenha(null);
-            return new ResponseEntity<Usuario>(userDatabase, HttpStatus.OK);
+            UsuarioView userDatabase = usuarioService.validateLogin(usuario).toUsuarioView();
+            return new ResponseEntity<UsuarioView>(userDatabase, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<Usuario>(usuario, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<UsuarioView>(HttpStatus.UNAUTHORIZED);
         }
 
     }
 
 
     @PutMapping("/")
-    public ResponseEntity<Usuario> update(@RequestBody Usuario usuario) {
+    public ResponseEntity<UsuarioView> update(@RequestBody Usuario usuario) {
         try {
-            Usuario user =usuarioService.update(usuario);
-            user.setSenha(null);
-            return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+            UsuarioView user = usuarioService.update(usuario).toUsuarioView();
+            return new ResponseEntity<UsuarioView>(user, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UsuarioView>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<Usuario> delete(@RequestBody Usuario usuario) {
+    public ResponseEntity delete(@RequestBody Usuario usuario) {
         try {
             usuarioService.delete(usuario);
-            return new ResponseEntity<Usuario>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Usuario> delete(@PathVariable("id") Integer id) {
+    public ResponseEntity delete(@PathVariable("id") Integer id) {
         try {
             usuarioService.delete(usuarioService.findById(id));
-            return new ResponseEntity<Usuario>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
