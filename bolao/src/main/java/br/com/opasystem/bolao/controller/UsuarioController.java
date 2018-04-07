@@ -37,7 +37,11 @@ public class UsuarioController {
     @GetMapping("/")
     public ResponseEntity<List<Usuario>> list() {
         try {
-            return new ResponseEntity<List<Usuario>>(usuarioService.list(), HttpStatus.OK);
+            List<Usuario> lst =  usuarioService.list();
+            for(Usuario user : lst){
+               user.setSenha(null);
+            }
+            return new ResponseEntity<List<Usuario>>(lst , HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<List<Usuario>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -48,6 +52,7 @@ public class UsuarioController {
     public ResponseEntity<Usuario> findByEmail(@PathVariable("email") String email) {
         try {
             Usuario user = usuarioService.findByEmail(email);
+            user.setSenha(null);
             if (user != null) {
                 return new ResponseEntity<Usuario>(user, HttpStatus.OK);
             } else {
@@ -63,7 +68,10 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> findById(@PathVariable("id") Integer id) {
         try {
-            return new ResponseEntity<Usuario>(usuarioService.findById(id), HttpStatus.OK);
+
+            Usuario  user = usuarioService.findById(id);
+            user.setSenha(null);
+            return new ResponseEntity<Usuario>(user , HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -74,7 +82,8 @@ public class UsuarioController {
         LOG.debug(usuario.toString());
         try {
             usuarioService.save(usuario);
-            return new ResponseEntity<Usuario>(usuario,HttpStatus.CREATED);
+            usuario.setSenha(null);
+            return new ResponseEntity<Usuario>(usuario, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<Usuario>(usuario, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -84,8 +93,9 @@ public class UsuarioController {
     @PostMapping("/validateLogin/")
     public ResponseEntity<Usuario> validateLogin(@RequestBody Usuario usuario) {
         try {
-            usuarioService.validateLogin(usuario);
-            return new ResponseEntity<Usuario>(usuario,HttpStatus.OK);
+            Usuario userDatabase = usuarioService.validateLogin(usuario);
+            userDatabase.setSenha(null);
+            return new ResponseEntity<Usuario>(userDatabase, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<Usuario>(usuario, HttpStatus.UNAUTHORIZED);
         }
@@ -93,11 +103,12 @@ public class UsuarioController {
     }
 
 
-
     @PutMapping("/")
     public ResponseEntity<Usuario> update(@RequestBody Usuario usuario) {
         try {
-            return new ResponseEntity<Usuario>(usuarioService.update(usuario), HttpStatus.OK);
+            Usuario user =usuarioService.update(usuario);
+            user.setSenha(null);
+            return new ResponseEntity<Usuario>(user, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<Usuario>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
