@@ -1,7 +1,7 @@
 function ApostaController($scope, $http, $route) {
 
 
-    var baseUrl = "http://localhost:8090/bolao";
+    var baseUrl = "http://sobolao-sobolao.193b.starter-ca-central-1.openshiftapps.com/bolao";
     $scope.allNumbers = [];
     $scope.newAposta = {};
     $scope.newAposta.bolao = {};
