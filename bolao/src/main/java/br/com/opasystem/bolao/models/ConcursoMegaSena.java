@@ -3,7 +3,7 @@ package br.com.opasystem.bolao.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -18,13 +18,13 @@ public class ConcursoMegaSena {
     @Id
     private Integer id;
 
-
-    @JoinTable(name = "numeros_concurso")
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "numeros_sorteados_megasena")
     private List<NumeroMegaSena> numerosSorteados;
 
     private Date dataSorteio;
 
+    private String acumulado;
     private Integer ganhadoresSena;
     private Integer ganhadoresQuina;
     private Integer ganhadoresQuadra;
@@ -94,5 +94,21 @@ public class ConcursoMegaSena {
 
     public void setMegaDaVirada(BigDecimal megaDaVirada) {
         this.megaDaVirada = megaDaVirada;
+    }
+
+    public Date getDataSorteio() {
+        return dataSorteio;
+    }
+
+    public void setDataSorteio(Date dataSorteio) {
+        this.dataSorteio = dataSorteio;
+    }
+
+    public String getAcumulado() {
+        return acumulado;
+    }
+
+    public void setAcumulado(String acumulado) {
+        this.acumulado = acumulado;
     }
 }
