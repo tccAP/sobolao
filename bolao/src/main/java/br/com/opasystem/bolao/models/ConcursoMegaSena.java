@@ -3,7 +3,7 @@ package br.com.opasystem.bolao.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +18,9 @@ public class ConcursoMegaSena {
     @Id
     private Integer id;
 
-    @ManyToMany
+
     @JoinTable(name = "numeros_concurso")
+    @OneToMany
     private List<NumeroMegaSena> numerosSorteados;
 
     private Date dataSorteio;
