@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Bolao</string>
+    <string name="facebook_app_id">1884615108495116</string>
+    <string name="fb_login_protocol_scheme">fb1884615108495116</string>
+    <string name="url_base">http://sobolao-sobolao.193b.starter-ca-central-1.openshiftapps.com/bolao</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

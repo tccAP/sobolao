@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item android:title="Boloes">
+            <menu>
+                <item
+                    android:id="@+id/nav_meus_boloes"
+                    android:icon="@drawable/ic_menu_loteria"
+                    android:title="Meus Boloes" />
+                <item
+                    android:id="@+id/nav_participo"
+                    android:icon="@drawable/ic_menu_loteria"
+                    android:title="Participo desses" />
+            </menu>
+        </item>
+    </group>
+
+    <item android:title="Jogos">
+        <menu>
+            <item
+                android:id="@+id/nav_reslutados"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Resultados" />
+            <item
+                android:id="@+id/nav_apostas"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Apostas" />
+            <item
+                android:id="@+id/nav_estatisticas"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Estatísticas" />
+        </menu>
+    </item>
+
+</menu>
